@@ -20,9 +20,9 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
-    install(CORS) {
-        host("localhost:4200")
-    }
+//    install(CORS) {
+//        host("localhost:4200")
+//    }
 
     routing {
         get("/api/file-types") {
