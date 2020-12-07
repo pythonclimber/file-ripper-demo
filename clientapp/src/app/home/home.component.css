@@ -1,11 +1,11 @@
 .image {
   font-size: 150px;
-  color: #dedede;
+  color: #c5e1a5;
 }
 
 .image-smaller {
   font-size: 100px;
-  color: white;
+  color: #c5e1a5;
 }
 
 .p-col-6 span {
@@ -19,9 +19,15 @@
 
 .p-grid {
   background-color: #191919;
+  min-height: 400px;
 }
 
 p {
   color: #dedede;
-  padding: 20px;
+  padding: 0 20px;
+  font-size: larger;
+}
+
+.root {
+  height: 100%;
 }
