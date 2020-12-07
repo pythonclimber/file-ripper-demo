@@ -45,5 +45,5 @@ describe('AppComponent', () => {
     expect(app.items[2].label).toEqual('Edit');
     expect(app.items[3].label).toEqual('Documentation');
     expect(app.items[4].label).toEqual('Settings');
-  })
+  });
 });
