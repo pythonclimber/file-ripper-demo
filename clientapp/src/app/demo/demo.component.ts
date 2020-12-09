@@ -30,9 +30,8 @@ export class DemoComponent implements OnInit {
         value: false
       }
     ];
-    
+
     this.demoService.getFileTypes().subscribe(fileTypes => {
-      console.log(fileTypes)
       this.fileTypes = fileTypes;
     });
 
@@ -53,5 +52,13 @@ export class DemoComponent implements OnInit {
         }
       ]
     }
+  }
+
+  submitFile(): void {
+    this.demoService.submitFile().subscribe(fileDef => {
+      this.fileDefinition = fileDef;
+      this.data = fileDef;
+    });
+
   }
 }

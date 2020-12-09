@@ -68,6 +68,14 @@
                    [disabled]="fileDefinition.fileType != 'XML'"/>
           </div>
         </div>
+        <div class="p-grid input-group">
+          <div class="p-col-12 no-pad-bottom" style="visibility: hidden;">
+            <label>This should be invisible</label>
+          </div>
+          <div class="p-col-12">
+            <button pButton type="button" label="Submit" (click)="submitFile()"></button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

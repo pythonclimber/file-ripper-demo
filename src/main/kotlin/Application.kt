@@ -1,8 +1,12 @@
 package com.ohgnarly
 
+import com.ohgnarly.fileripper.FieldDefinition
+import com.ohgnarly.fileripper.FileDefinition
+import com.ohgnarly.fileripper.FileType.DELIMITED
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
+import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -20,9 +24,16 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
-//    install(CORS) {
-//        host("localhost:4200")
-//    }
+    install(CORS) {
+        method(HttpMethod.Options)
+        method(HttpMethod.Put)
+        method(HttpMethod.Delete)
+        method(HttpMethod.Patch)
+        header(HttpHeaders.Authorization)
+        allowCredentials = true
+        allowNonSimpleContentTypes = true
+        anyHost()
+    }
 
     routing {
         get("/api/file-types") {
@@ -32,6 +43,22 @@ fun Application.module(testing: Boolean = false) {
                 add(FileType.build("Xml", "XML"))
             }
             call.respond(fileTypes)
+        }
+
+        post("/api/rip-file") {
+            val fieldDefs = mutableListOf<FieldDefinition>().apply {
+                this.add(FieldDefinition().apply { fieldName = "name" })
+                this.add(FieldDefinition().apply { fieldName = "age" })
+                this.add(FieldDefinition().apply { fieldName = "dob" })
+            }
+            val fileDef = FileDefinition().apply {
+                this.delimiter = "|"
+                this.hasHeader = true
+                this.fileType = DELIMITED
+                this.fileMask = "Valid-*.txt"
+                this.fieldDefinitions = fieldDefs
+            }
+            call.respond(fileDef)
         }
 
         static("/") {

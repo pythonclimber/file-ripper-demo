@@ -1,5 +1,5 @@
 .p-grid {
-  background-color: #191919;
+  background-color: #1f2d40;
   min-height: 100px;
 }
 
@@ -15,10 +15,5 @@
 .p-col-4 span {
   font-family: "Brush Script MT";
   font-size: 62px;
-  color: #c5e1a5;
-}
-
-.tab-menu {
-  background-color: #2b2c2d;
-  color: #c5e1a5;
+  color: #81c785;
 }

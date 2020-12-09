@@ -66,6 +66,11 @@
             <version>${ktor_version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.ohgnarly</groupId>
+            <artifactId>file-ripper</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>

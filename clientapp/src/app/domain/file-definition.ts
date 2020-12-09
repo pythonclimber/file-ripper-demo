@@ -3,4 +3,9 @@ export class FileDefinition {
   fileType: string;
   delimiter: string;
   recordXmlElement: string;
+  fieldDefinitions: FieldDefinition[]
+}
+
+export class FieldDefinition {
+  fieldName: string;
 }
