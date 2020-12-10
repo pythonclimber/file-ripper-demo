@@ -1,0 +1,68 @@
+<p-dialog [(visible)]="showAddField" (onShow)="initializeDialog()" [closable]="false">
+  <div class="p-grid extra-space">
+    <fieldset class="extra-space">
+      <legend>Add New Field</legend>
+      <div class="p-col extra-space">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-info-circle"></i>
+          </span>
+          <span class="p-float-label">
+            <input pInputText
+                   id="field-name"
+                   type="text"
+                   [(ngModel)]="fieldDefinition.fieldName" />
+            <label for="field-name">Field Name</label>
+          </span>
+        </div>
+        <span class="alert alert-danger {{ fieldDefinitionValidation.isFieldNameInvalid ? 'visible' : 'hidden' }}">
+          <label>Field Name is required</label>
+        </span>
+      </div>
+      <div *ngIf="fileType == 'FIXED'" class="p-col extra-space">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-info-circle"></i>
+          </span>
+          <span class="p-float-label">
+            <p-inputNumber
+                   id="start-position"
+                   [(ngModel)]="fieldDefinition.startPosition">
+            </p-inputNumber>
+            <label for="start-position">Start Position</label>
+          </span>
+        </div>
+        <span class="alert alert-danger {{ fieldDefinitionValidation.isStartPositionInvalid ? 'visible' : 'hidden' }}">
+          <label>Start Position is required</label>
+        </span>
+      </div>
+      <div *ngIf="fileType == 'FIXED'" class="p-col extra-space">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-info-circle"></i>
+          </span>
+          <span class="p-float-label">
+            <p-inputNumber
+              id="field-length"
+              [(ngModel)]="fieldDefinition.fieldLength">
+            </p-inputNumber>
+            <label for="start-position">Field Length</label>
+          </span>
+        </div>
+        <span class="alert alert-danger {{ fieldDefinitionValidation.isFieldLengthInvalid ? 'visible' : 'hidden' }}">
+          <label>Field Length is required</label>
+        </span>
+      </div>
+      <div class="p-col extra-space">
+        <div class="p-grid">
+          <div class="p-col-6">
+            <p-button label="Submit" (click)="onSubmit()"></p-button>
+          </div>
+          <div class="p-col-6">
+            <p-button class="p-button-danger" label="Cancel" (click)="toggleModal()"></p-button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</p-dialog>

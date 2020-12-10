@@ -8,4 +8,36 @@ export class FileDefinition {
 
 export class FieldDefinition {
   fieldName: string;
+  startPosition: number;
+  fieldLength: number;
+}
+
+export class FieldDefinitionValidationResult {
+  isFieldNameInvalid: boolean;
+  isStartPositionInvalid: boolean;
+  isFieldLengthInvalid: boolean;
+
+  constructor() {
+    this.isFieldLengthInvalid = false;
+    this.isStartPositionInvalid = false;
+    this.isFieldNameInvalid = false;
+  }
+}
+
+export class FileDefinitionValidationResult {
+  isHasHeaderInvalid: boolean;
+  isFileTypeInvalid: boolean;
+  isDelimiterInvalid: boolean;
+  isRecordXmlElementInvalid: boolean;
+  isFieldDefinitionListInvalid: boolean;
+  isFileInvalid: boolean;
+
+  constructor() {
+    this.isDelimiterInvalid = false;
+    this.isFileTypeInvalid = false;
+    this.isHasHeaderInvalid = false;
+    this.isRecordXmlElementInvalid = false;
+    this.isFieldDefinitionListInvalid = false;
+    this.isFileInvalid = false;
+  }
 }

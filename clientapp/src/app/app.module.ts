@@ -16,12 +16,17 @@ import {RadioButtonModule} from "primeng/radiobutton";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
+import {DialogModule} from "primeng/dialog";
+import { AddFieldComponent } from './add-field/add-field.component';
+import {ValidationService} from "./services/validation.service";
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DemoComponent
+    DemoComponent,
+    AddFieldComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +40,13 @@ import {TableModule} from "primeng/table";
     RadioButtonModule,
     InputTextModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    DialogModule,
+    InputNumberModule
   ],
   providers: [
-    DemoService
+    DemoService,
+    ValidationService
   ],
   bootstrap: [AppComponent]
 })
