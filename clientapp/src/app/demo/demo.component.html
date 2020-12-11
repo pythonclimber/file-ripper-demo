@@ -147,7 +147,7 @@
           [style]="{width: '50vw'}"
           [baseZIndex]="10000"
           [closable]="false">
-  <p>{{ errorMessage }}</p>
+  <p class="alert alert-danger">{{ errorMessage }}</p>
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-check" (click)="displayErrorDialog=false" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
