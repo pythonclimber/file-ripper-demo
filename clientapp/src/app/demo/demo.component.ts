@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DemoService} from "../services/demo.service";
 import {FileType} from "../domain/file-type";
 import {FieldDefinition, FileDefinition, FileDefinitionValidationResult} from "../domain/file-definition";
 import {BoolOption} from "../domain/bool-option";
 import {ValidationService} from "../services/validation.service";
-import {MatListIconCssMatStyler} from "@angular/material/list";
 
 @Component({
   selector: 'app-demo',
@@ -18,9 +17,10 @@ export class DemoComponent implements OnInit {
   fileDefinition: FileDefinition;
   fileDefinitionValidation: FileDefinitionValidationResult;
   showAddField: boolean;
-  displayFileType: boolean;
   file: File;
   isFileInvalid: boolean;
+  displayErrorDialog: boolean;
+  errorMessage: string;
 
   constructor(private demoService: DemoService, private validationService: ValidationService) { }
 
@@ -80,6 +80,9 @@ export class DemoComponent implements OnInit {
         this.data = {
           fileDefinition: fileDef
         };
+      }, error => {
+        this.errorMessage = error.error;
+        this.displayErrorDialog = true;
       });
     }
   }
@@ -90,7 +93,8 @@ export class DemoComponent implements OnInit {
 
   toggleDialog() {
     if (!this.fileDefinition.fileType) {
-      this.displayFileType = true;
+      this.errorMessage = 'Please select File Type before adding fields.';
+      this.displayErrorDialog = true;
       return;
     }
     this.showAddField = !this.showAddField;
@@ -104,7 +108,28 @@ export class DemoComponent implements OnInit {
   }
 
   deleteField(fieldDef: FieldDefinition) {
-    const index = this.fileDefinition.fieldDefinitions.indexOf(fieldDef)
+    const index = this.fileDefinition.fieldDefinitions.indexOf(fieldDef);
     this.fileDefinition.fieldDefinitions.splice(index, 1);
+  }
+
+  onFileTypeChange() {
+    switch (this.fileDefinition.fileType) {
+      case 'XML':
+        this.fileDefinition.hasHeader = null;
+        this.fileDefinition.delimiter = null;
+        break;
+      case 'DELIMITED':
+        this.fileDefinition.recordXmlElement = null;
+      case 'FIXED':
+        this.fileDefinition.delimiter = null;
+        this.fileDefinition.recordXmlElement = null;
+        break;
+      default:
+        this.fileDefinition.delimiter = null;
+        this.fileDefinition.recordXmlElement = null;
+        this.fileDefinition.hasHeader = null;
+        break;
+    }
+    this.fileDefinition.fieldDefinitions = [];
   }
 }

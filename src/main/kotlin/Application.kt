@@ -3,10 +3,12 @@ package com.ohgnarly
 import com.google.gson.Gson
 import com.ohgnarly.fileripper.FileDefinition
 import com.ohgnarly.fileripper.FileRipper
+import com.ohgnarly.fileripper.FileRipperException
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.http.*
+import io.ktor.http.HttpStatusCode.Companion.InternalServerError
 import io.ktor.http.content.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -55,10 +57,14 @@ fun Application.module(testing: Boolean = false) {
         }
 
         post("/api/rip-file") {
-            val multipart = call.receiveMultipart()
-            val fileDemo = FileDemo.build(multipart)
-            val fileOutput = FileRipper().ripFile(fileDemo.file, fileDemo.fileDefinition)
-            call.respond(fileOutput)
+            try {
+                val multipart = call.receiveMultipart()
+                val fileDemo = FileDemo.build(multipart)
+                val fileOutput = FileRipper().ripFile(fileDemo.file, fileDemo.fileDefinition)
+                call.respond(fileOutput)
+            } catch (ex: FileRipperException) {
+                call.respond(InternalServerError, ex.message!!)
+            }
         }
 
         static("/") {

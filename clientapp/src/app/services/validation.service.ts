@@ -20,7 +20,7 @@ export class ValidationService {
       validationResult.isFieldNameInvalid = true;
     }
 
-    if (fileType == "FIXED" && !fieldDefinition.startPosition) {
+    if (fileType == "FIXED" && fieldDefinition.startPosition == null) {
       validationResult.isStartPositionInvalid = true;
     }
 
@@ -42,7 +42,7 @@ export class ValidationService {
       validationResult.isFileInvalid = true;
     }
 
-    if (fileDefinition.hasHeader == null || fileDefinition.hasHeader == undefined) {
+    if (fileDefinition.hasHeader == null && fileDefinition.fileType != 'XML') {
       validationResult.isHasHeaderInvalid = true;
     }
 

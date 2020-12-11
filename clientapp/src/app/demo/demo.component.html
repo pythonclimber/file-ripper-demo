@@ -13,7 +13,8 @@
                         optionLabel="name"
                         optionValue="value"
                         placeholder="Select File Type:"
-                        [showClear]="true">
+                        [showClear]="true"
+                        (onChange)="onFileTypeChange()">
             </p-dropdown>
           </div>
           <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isFileTypeInvalid ? 'visible' : 'hidden' }}">
@@ -31,7 +32,7 @@
                         optionLabel="name"
                         optionValue="value"
                         placeholder="Has Header Row?"
-                        [showClear]="true">
+                        [showClear]="true" [disabled]="fileDefinition.fileType == 'XML'">
             </p-dropdown>
           </div>
           <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isHasHeaderInvalid ? 'visible' : 'hidden' }}">
@@ -138,13 +139,13 @@
 <app-add-field [showAddField]="showAddField" (submit)="addField($event)"
                [fileType]="fileDefinition.fileType"></app-add-field>
 
-<p-dialog header="Choose File Type"
-          [(visible)]="displayFileType"
+<p-dialog header="Error Ripping File"
+          [(visible)]="displayErrorDialog"
           [style]="{width: '50vw'}"
           [baseZIndex]="10000"
           [closable]="false">
-  <p>Please select File Type before adding fields.</p>
+  <p>{{ errorMessage }}</p>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="displayFileType=false" label="Ok" styleClass="p-button-text"></p-button>
+    <p-button icon="pi pi-check" (click)="displayErrorDialog=false" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>
