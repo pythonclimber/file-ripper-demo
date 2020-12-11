@@ -14,7 +14,8 @@
                         optionValue="value"
                         placeholder="Select File Type:"
                         [showClear]="true"
-                        (onChange)="onFileTypeChange()">
+                        (onChange)="onFileTypeChange()"
+                        [styleClass]="'dropdown'">
             </p-dropdown>
           </div>
           <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isFileTypeInvalid ? 'visible' : 'hidden' }}">
@@ -32,7 +33,9 @@
                         optionLabel="name"
                         optionValue="value"
                         placeholder="Has Header Row?"
-                        [showClear]="true" [disabled]="fileDefinition.fileType == 'XML'">
+                        [showClear]="true"
+                        [disabled]="fileDefinition.fileType == 'XML'"
+                        [styleClass]="'dropdown'">
             </p-dropdown>
           </div>
           <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isHasHeaderInvalid ? 'visible' : 'hidden' }}">

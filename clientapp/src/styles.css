@@ -46,3 +46,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .alert-danger {
   color: red;
 }
+
+.dropdown {
+  width: 14rem;
+}
