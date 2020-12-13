@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DemoService} from "../services/demo.service";
-import {FileType} from "../domain/file-type";
+import {FileType, FileTypes} from "../domain/file-type";
 import {FieldDefinition, FileDefinition, FileDefinitionValidationResult} from "../domain/file-definition";
 import {BoolOption} from "../domain/bool-option";
 import {ValidationService} from "../services/validation.service";
@@ -40,9 +40,7 @@ export class DemoComponent implements OnInit {
       }
     ];
 
-    this.demoService.getFileTypes().subscribe(fileTypes => {
-      this.fileTypes = fileTypes;
-    });
+    this.fileTypes = [FileTypes.delimited, FileTypes.fixed, FileTypes.xml];
 
     this.data = {
       "yourData": "Your data will display here",
@@ -114,13 +112,13 @@ export class DemoComponent implements OnInit {
 
   onFileTypeChange() {
     switch (this.fileDefinition.fileType) {
-      case 'XML':
+      case FileTypes.xml.value:
         this.fileDefinition.hasHeader = null;
         this.fileDefinition.delimiter = null;
         break;
-      case 'DELIMITED':
+      case FileTypes.delimited.value:
         this.fileDefinition.recordXmlElement = null;
-      case 'FIXED':
+      case FileTypes.fixed.value:
         this.fileDefinition.delimiter = null;
         this.fileDefinition.recordXmlElement = null;
         break;

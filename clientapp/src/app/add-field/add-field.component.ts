@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FieldDefinition, FieldDefinitionValidationResult} from "../domain/file-definition";
 import {ValidationService} from "../services/validation.service";
+import {FileType, FileTypes} from "../domain/file-type";
 
 @Component({
   selector: 'app-add-field',
@@ -13,6 +14,7 @@ export class AddFieldComponent implements OnInit{
   @Output() submit = new EventEmitter<FieldDefinition>();
   fieldDefinition: FieldDefinition;
   fieldDefinitionValidation: FieldDefinitionValidationResult;
+  fixedType: FileType = FileTypes.fixed;
 
   constructor(private validationService: ValidationService) { }
 

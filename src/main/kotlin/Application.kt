@@ -47,15 +47,6 @@ fun Application.module(testing: Boolean = false) {
     }
 
     routing {
-        get("/api/file-types") {
-            val fileTypes = mutableListOf<FileType>().apply {
-                add(FileType.build("Fixed Width", "FIXED"))
-                add(FileType.build("Character Delimited", "DELIMITED"))
-                add(FileType.build("Xml", "XML"))
-            }
-            call.respond(fileTypes)
-        }
-
         post("/api/rip-file") {
             try {
                 val multipart = call.receiveMultipart()

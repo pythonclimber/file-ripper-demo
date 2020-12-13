@@ -5,6 +5,7 @@ import {
   FileDefinition,
   FileDefinitionValidationResult
 } from "../domain/file-definition";
+import {FileTypes} from "../domain/file-type";
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,11 @@ export class ValidationService {
       validationResult.isFieldNameInvalid = true;
     }
 
-    if (fileType == "FIXED" && fieldDefinition.startPosition == null) {
+    if (fileType == FileTypes.fixed.value && fieldDefinition.startPosition == null) {
       validationResult.isStartPositionInvalid = true;
     }
 
-    if (fileType == "FIXED" && !fieldDefinition.fieldLength) {
+    if (fileType == FileTypes.fixed.value && !fieldDefinition.fieldLength) {
       validationResult.isFieldLengthInvalid = true;
     }
 
@@ -42,15 +43,15 @@ export class ValidationService {
       validationResult.isFileInvalid = true;
     }
 
-    if (fileDefinition.hasHeader == null && fileDefinition.fileType != 'XML') {
+    if (fileDefinition.hasHeader == null && fileDefinition.fileType != FileTypes.xml.value) {
       validationResult.isHasHeaderInvalid = true;
     }
 
-    if (!fileDefinition.delimiter && fileDefinition.fileType == 'DELIMITED') {
+    if (!fileDefinition.delimiter && fileDefinition.fileType == FileTypes.delimited.value) {
       validationResult.isDelimiterInvalid = true;
     }
 
-    if (!fileDefinition.recordXmlElement && fileDefinition.fileType == 'XML') {
+    if (!fileDefinition.recordXmlElement && fileDefinition.fileType == FileTypes.xml.value) {
       validationResult.isRecordXmlElementInvalid = true;
     }
 
