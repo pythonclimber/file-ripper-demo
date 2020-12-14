@@ -1,13 +1,3 @@
-.image {
-  font-size: 150px;
-  color: #81c785;
-}
-
-.image-smaller {
-  font-size: 100px;
-  color: #81c785;
-}
-
 .p-col-6 span {
   margin: auto;
 }
@@ -24,11 +14,37 @@
 
 p {
   color: #dedede;
-  padding: 0 20px;
-  font-size: larger;
 }
 
 .root {
   background-color: #1f2d40;
   height: 100%;
+}
+
+.image {
+  font-size: 45px;
+  color: #81c785;
+}
+
+.image-smaller {
+  font-size: 30px;
+  color: #81c785;
+}
+
+@media screen and (min-width: 992px){
+  .image {
+    font-size: 150px;
+    color: #81c785;
+  }
+
+  .image-smaller {
+    font-size: 100px;
+    color: #81c785;
+  }
+
+  p {
+    color: #dedede;
+    padding: 0 20px;
+    font-size: larger;
+  }
 }

@@ -3,17 +3,52 @@
   min-height: 100px;
 }
 
-.p-col-4 {
+.p-lg-4 {
   text-align: center;
   margin: auto;
+}
+
+.tab-menu {
+  visibility: collapse;
 }
 
 .p-col-8 {
   margin: auto;
 }
 
-.p-col-4 span {
+.p-lg-4 span {
   font-family: "Brush Script MT";
+  font-size: 38px;
+  color: #81c785;
+}
+
+.p-col-2 {
   font-size: 62px;
   color: #81c785;
+  text-align: right;
+  margin: 20px 0;
+}
+
+i {
+  font-size: x-large;
+}
+
+.menu-icon {
+  visibility: visible;
+}
+
+@media screen and (min-width: 992px) {
+  .tab-menu {
+    visibility: visible;
+  }
+
+  .menu-icon {
+    visibility: collapse;
+  }
+
+  .p-lg-4 span {
+    font-family: "Brush Script MT";
+    font-size: 62px;
+    color: #81c785;
+  }
 }

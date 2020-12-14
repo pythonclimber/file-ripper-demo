@@ -20,6 +20,8 @@ import {DialogModule} from "primeng/dialog";
 import { AddFieldComponent } from './add-field/add-field.component';
 import {ValidationService} from "./services/validation.service";
 import {InputNumberModule} from "primeng/inputnumber";
+import {SidebarModule} from "primeng/sidebar";
+import {MenuModule} from "primeng/menu";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import {InputNumberModule} from "primeng/inputnumber";
     ButtonModule,
     TableModule,
     DialogModule,
-    InputNumberModule
+    InputNumberModule,
+    SidebarModule,
+    MenuModule
   ],
   providers: [
     DemoService,
