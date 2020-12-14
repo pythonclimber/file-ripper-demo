@@ -17,7 +17,7 @@
 }
 
 .p-lg-4 span {
-  font-family: "Brush Script MT";
+  font-family: "Brush Script MT", serif;
   font-size: 38px;
   color: #81c785;
 }
@@ -43,11 +43,11 @@ i {
   }
 
   .menu-icon {
-    visibility: collapse;
+    display: none;
   }
 
   .p-lg-4 span {
-    font-family: "Brush Script MT";
+    font-family: "Brush Script MT", serif;
     font-size: 62px;
     color: #81c785;
   }
