@@ -40,6 +40,7 @@ i {
 @media screen and (min-width: 992px) {
   .tab-menu {
     visibility: visible;
+    display: block;
   }
 
   .menu-icon {
