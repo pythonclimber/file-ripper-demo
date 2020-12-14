@@ -9,7 +9,7 @@
 }
 
 .tab-menu {
-  visibility: collapse;
+  display: none;
 }
 
 .p-col-8 {
