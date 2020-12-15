@@ -53,7 +53,7 @@ fun Application.module(testing: Boolean = false) {
                 val fileDemo = FileDemo.build(multipart)
                 val fileOutput = FileRipper().ripFile(fileDemo.file, fileDemo.fileDefinition)
                 call.respond(fileOutput)
-            } catch (ex: FileRipperException) {
+            } catch (ex: Exception) {
                 call.respond(InternalServerError, ex.message!!)
             }
         }
