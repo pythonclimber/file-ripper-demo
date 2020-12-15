@@ -82,7 +82,7 @@ export class DemoComponent implements OnInit {
           fileDefinition: fileDef
         };
       }, error => {
-        console.log(error);
+        console.log(error.name, error.message, error.description);
         this.errorMessage = error.error;
         this.displayErrorDialog = true;
       });
