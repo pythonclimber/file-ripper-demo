@@ -10,17 +10,22 @@ export class FieldDefinition {
   fieldName: string;
   startPosition: number;
   fieldLength: number;
+  positionInRow: number;
+  xmlFieldName: string;
 }
 
 export class FieldDefinitionValidationResult {
   isFieldNameInvalid: boolean;
   isStartPositionInvalid: boolean;
   isFieldLengthInvalid: boolean;
+  isPositionInRowInvalid: boolean;
+  isXmlFieldNameInvalid: string;
 
   constructor() {
     this.isFieldLengthInvalid = false;
     this.isStartPositionInvalid = false;
     this.isFieldNameInvalid = false;
+    this.isPositionInRowInvalid = false;
   }
 }
 

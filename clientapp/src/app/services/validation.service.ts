@@ -29,6 +29,10 @@ export class ValidationService {
       validationResult.isFieldLengthInvalid = true;
     }
 
+    if (fileType == FileTypes.delimited.value && fieldDefinition.positionInRow == null) {
+      validationResult.isPositionInRowInvalid = true;
+    }
+
     return validationResult;
   }
 

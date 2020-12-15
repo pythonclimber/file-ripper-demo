@@ -113,16 +113,20 @@
           <ng-template pTemplate="header">
             <tr>
               <th>Name</th>
-              <th>Start Position</th>
-              <th>Field Length</th>
+              <th *ngIf="fileDefinition.fileType == fixedType.value">Start Position</th>
+              <th *ngIf="fileDefinition.fileType == fixedType.value">Field Length</th>
+              <th *ngIf="fileDefinition.fileType == delimitedType.value">Position on Row</th>
+              <th *ngIf="fileDefinition.fileType == xmlType.value">XML Field Name</th>
               <th>Actions</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-fieldDef>
             <tr>
               <td>{{fieldDef.fieldName}}</td>
-              <td>{{fieldDef.startPosition}}</td>
-              <td>{{fieldDef.fieldLength}}</td>
+              <td *ngIf="fileDefinition.fileType == fixedType.value">{{fieldDef.startPosition}}</td>
+              <td *ngIf="fileDefinition.fileType == fixedType.value">{{fieldDef.fieldLength}}</td>
+              <td *ngIf="fileDefinition.fileType == delimitedType.value">{{fieldDef.positionInRow}}</td>
+              <td *ngIf="fileDefinition.fileType == xmlType.value">{{fieldDef.xmlFieldName}}</td>
               <td>
                 <a (click)="deleteField(fieldDef)">
                   <i class="pi pi-times"></i>

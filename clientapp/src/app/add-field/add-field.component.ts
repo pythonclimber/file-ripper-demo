@@ -15,6 +15,8 @@ export class AddFieldComponent implements OnInit{
   fieldDefinition: FieldDefinition;
   fieldDefinitionValidation: FieldDefinitionValidationResult;
   fixedType: FileType = FileTypes.fixed;
+  delimitedType: FileType = FileTypes.delimited;
+  xmlType: FileType = FileTypes.xml;
 
   constructor(private validationService: ValidationService) { }
 
@@ -39,7 +41,11 @@ export class AddFieldComponent implements OnInit{
 
     if (!this.fieldDefinitionValidation.isFieldNameInvalid
         && !this.fieldDefinitionValidation.isStartPositionInvalid
-        && !this.fieldDefinitionValidation.isFieldNameInvalid) {
+        && !this.fieldDefinitionValidation.isFieldNameInvalid
+        && !this.fieldDefinitionValidation.isPositionInRowInvalid) {
+      if (this.fileType == this.xmlType.value && !this.fieldDefinition.xmlFieldName) {
+        this.fieldDefinition.xmlFieldName = this.fieldDefinition.fieldName;
+      }
       this.submit.emit(this.fieldDefinition);
       this.showAddField = !this.showAddField;
     }
