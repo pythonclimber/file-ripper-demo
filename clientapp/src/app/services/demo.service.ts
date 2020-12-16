@@ -13,9 +13,9 @@ export class DemoService {
 
   getFileTypes: () => Observable<FileType[]> = () => {
     return this.httpClient.get<FileType[]>(`${environment.apiBaseUrl}/api/file-types`);
-  }
+  };
 
   submitFile: (data: any) => Observable<FileDefinition> = (data: any) => {
     return this.httpClient.post<FileDefinition>(`${environment.apiBaseUrl}/api/rip-file`, data);
-  }
+  };
 }
