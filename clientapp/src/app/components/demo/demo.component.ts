@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {DemoService} from "../services/demo.service";
-import {FileType, FileTypes} from "../domain/file-type";
-import {FieldDefinition, FileDefinition, FileDefinitionValidationResult} from "../domain/file-definition";
-import {BoolOption} from "../domain/bool-option";
-import {ValidationService} from "../services/validation.service";
+import {DemoService} from "../../services/demo.service";
+import {FileType, FileTypes} from "../../domain/file-type";
+import {FieldDefinition, FileDefinition, FileDefinitionValidationResult} from "../../domain/file-definition";
+import {BoolOption} from "../../domain/bool-option";
+import {ValidationService} from "../../services/validation.service";
+import {EditMode, EditType} from "../../domain/edit-mode";
 
 @Component({
   selector: 'app-demo',
@@ -24,6 +25,7 @@ export class DemoComponent implements OnInit {
   fixedType: FileType = FileTypes.fixed;
   delimitedType: FileType = FileTypes.delimited;
   xmlType: FileType = FileTypes.xml;
+  editMode: EditMode<FieldDefinition>;
 
   constructor(private demoService: DemoService, private validationService: ValidationService) { }
 
@@ -102,10 +104,13 @@ export class DemoComponent implements OnInit {
     this.showAddField = !this.showAddField;
   }
 
-  addField(fieldDef: FieldDefinition) {
-    if (fieldDef) {
-      this.fileDefinition.fieldDefinitions.push(fieldDef);
-    }
+  addField() {
+    this.editMode = new EditMode<FieldDefinition>(EditType.ADD, new FieldDefinition());
+    this.toggleDialog();
+  }
+
+  editField(fieldDef: FieldDefinition) {
+    this.editMode = new EditMode<FieldDefinition>(EditType.EDIT, fieldDef);
     this.toggleDialog();
   }
 
@@ -118,20 +123,27 @@ export class DemoComponent implements OnInit {
     switch (this.fileDefinition.fileType) {
       case FileTypes.xml.value:
         this.fileDefinition.hasHeader = null;
-        this.fileDefinition.delimiter = null;
+        this.fileDefinition.delimiter = '';
         break;
       case FileTypes.delimited.value:
-        this.fileDefinition.recordXmlElement = null;
+        this.fileDefinition.recordXmlElement = '';
       case FileTypes.fixed.value:
-        this.fileDefinition.delimiter = null;
-        this.fileDefinition.recordXmlElement = null;
+        this.fileDefinition.delimiter = '';
+        this.fileDefinition.recordXmlElement = '';
         break;
       default:
-        this.fileDefinition.delimiter = null;
-        this.fileDefinition.recordXmlElement = null;
+        this.fileDefinition.delimiter = '';
+        this.fileDefinition.recordXmlElement = '';
         this.fileDefinition.hasHeader = null;
         break;
     }
     this.fileDefinition.fieldDefinitions = [];
+  }
+
+  completeAddEdit(editMode: EditMode<FieldDefinition>) {
+    if (!!editMode && editMode.complete && editMode.editType == EditType.ADD) {
+      this.fileDefinition.fieldDefinitions.push(editMode.editObject);
+    }
+    this.toggleDialog();
   }
 }

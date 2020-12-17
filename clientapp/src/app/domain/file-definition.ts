@@ -12,6 +12,14 @@ export class FieldDefinition {
   fieldLength: number;
   positionInRow: number;
   xmlFieldName: string;
+
+  public updateFromCopy(fieldDefCopy: FieldDefinition) {
+    this.fieldName = fieldDefCopy.fieldName;
+    this.startPosition = fieldDefCopy.startPosition;
+    this.fieldLength = fieldDefCopy.fieldLength;
+    this.positionInRow = fieldDefCopy.positionInRow;
+    this.xmlFieldName = fieldDefCopy.xmlFieldName;
+  }
 }
 
 export class FieldDefinitionValidationResult {
@@ -19,7 +27,7 @@ export class FieldDefinitionValidationResult {
   isStartPositionInvalid: boolean;
   isFieldLengthInvalid: boolean;
   isPositionInRowInvalid: boolean;
-  isXmlFieldNameInvalid: string;
+  isXmlFieldNameInvalid: boolean;
 
   constructor() {
     this.isFieldLengthInvalid = false;

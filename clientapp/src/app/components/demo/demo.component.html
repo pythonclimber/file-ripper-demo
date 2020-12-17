@@ -18,7 +18,8 @@
                         [styleClass]="'dropdown'">
             </p-dropdown>
           </div>
-          <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isFileTypeInvalid ? 'visible' : 'hidden' }}">
+          <div
+            class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isFileTypeInvalid ? 'visible' : 'hidden' }}">
             <label style="color: red;">File Type is required</label>
           </div>
         </div>
@@ -38,7 +39,8 @@
                         [styleClass]="'dropdown'">
             </p-dropdown>
           </div>
-          <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isHasHeaderInvalid ? 'visible' : 'hidden' }}">
+          <div
+            class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isHasHeaderInvalid ? 'visible' : 'hidden' }}">
             <label style="color: red;">Has Header is required</label>
           </div>
         </div>
@@ -55,38 +57,20 @@
         </div>
       </div>
       <div class="p-col-12 p-md-6">
-        <div class="p-grid input-group">
-          <div class="p-col-12 no-pad-bottom">
-            <label for="delimiter">Delimiter:</label>
-          </div>
-          <div class="p-col-12 no-pad-top">
-            <input type="text"
-                   pInputText
-                   id="delimiter"
-                   [(ngModel)]="fileDefinition.delimiter"
-                   maxlength="5"
-                   [disabled]="fileDefinition.fileType != 'DELIMITED'"/>
-          </div>
-          <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isDelimiterInvalid ? 'visible' : 'hidden' }}">
-            <label style="color: red;">Delimiter is required</label>
-          </div>
-        </div>
-        <div class="p-grid input-group">
-          <div class="p-col-12 no-pad-bottom">
-            <label for="xml-element">Record Xml Element:</label>
-          </div>
-          <div class="p-col-12 no-pad-top">
-            <input type="text"
-                   pInputText
-                   id="xml-element"
-                   [(ngModel)]="fileDefinition.recordXmlElement"
-                   maxlength="50"
-                   [disabled]="fileDefinition.fileType != 'XML'"/>
-          </div>
-          <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isRecordXmlElementInvalid ? 'visible' : 'hidden' }}">
-            <label style="color: red;">Record XML Element is required</label>
-          </div>
-        </div>
+        <app-text-input [(text)]="fileDefinition.delimiter"
+                        [disabled]="fileDefinition.fileType != delimitedType.value"
+                        [invalid]="fileDefinitionValidation.isDelimiterInvalid"
+                        [errorMessage]="'Delimiter is required'"
+                        [header]="'Delimiter:'"
+                        [maxlength]="5">
+        </app-text-input>
+        <app-text-input [(text)]="fileDefinition.recordXmlElement"
+                        [disabled]="fileDefinition.fileType != xmlType.value"
+                        [invalid]="fileDefinitionValidation.isRecordXmlElementInvalid"
+                        [errorMessage]="'Record XML Element is required'"
+                        [header]="'Record XML Element:'"
+                        [maxlength]="50">
+        </app-text-input>
         <div class="p-grid input-group">
           <div class="p-col-12 no-pad-bottom" style="visibility: hidden;">
             <label>This should be invisible</label>
@@ -97,7 +81,7 @@
                 <p-button label="Submit" (click)="submitFile()"></p-button>
               </div>
               <div class="p-col-5">
-                <p-button label="Add Field" (click)="toggleDialog()"></p-button>
+                <p-button label="Add Field" (click)="addField()"></p-button>
               </div>
             </div>
           </div>
@@ -105,7 +89,8 @@
       </div>
     </div>
     <div class="p-grid">
-      <div class="p-col-12 alert no-pad-top  {{ fileDefinitionValidation.isFieldDefinitionListInvalid ? 'visible' : 'hidden' }}">
+      <div
+        class="p-col-12 alert no-pad-top  {{ fileDefinitionValidation.isFieldDefinitionListInvalid ? 'visible' : 'hidden' }}">
         <label style="color: red;">At least one Field Definition is required</label>
       </div>
       <div class="p-col-12">
@@ -128,9 +113,18 @@
               <td *ngIf="fileDefinition.fileType == delimitedType.value">{{fieldDef.positionInRow}}</td>
               <td *ngIf="fileDefinition.fileType == xmlType.value">{{fieldDef.xmlFieldName}}</td>
               <td>
-                <a (click)="deleteField(fieldDef)">
-                  <i class="pi pi-times"></i>
-                </a>
+                <div class="p-grid">
+                  <div class="p-col-3">
+                    <a (click)="editField(fieldDef)">
+                      <i class="pi pi-pencil"></i>
+                    </a>
+                  </div>
+                  <div class="p-col-3">
+                    <a (click)="deleteField(fieldDef)">
+                      <i class="pi pi-times"></i>
+                    </a>
+                  </div>
+                </div>
               </td>
             </tr>
           </ng-template>
@@ -143,14 +137,17 @@
   </div>
 </div>
 
-<app-add-field [showAddField]="showAddField" (submit)="addField($event)"
-               [fileType]="fileDefinition.fileType"></app-add-field>
+<app-add-field [showAddField]="showAddField" (submit)="completeAddEdit($event)"
+               [fileType]="fileDefinition.fileType" [editMode]="editMode"></app-add-field>
 
 <p-dialog header="Error Ripping File"
           [(visible)]="displayErrorDialog"
           [style]="{width: '50vw'}"
           [baseZIndex]="10000"
-          [closable]="false">
+          [closable]="false"
+          [resizable]="false"
+          [draggable]="false"
+          [modal]="true">
   <p class="alert alert-danger">{{ errorMessage }}</p>
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-check" (click)="displayErrorDialog=false" label="Ok" styleClass="p-button-text"></p-button>

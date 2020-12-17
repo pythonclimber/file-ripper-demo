@@ -1,0 +1,79 @@
+<p-dialog [(visible)]="showAddField"
+          (onShow)="initializeDialog()"
+          [closable]="false" [modal]="true"
+          [draggable]="false"
+          [resizable]="false">
+  <div class="p-grid extra-space">
+    <fieldset class="extra-space">
+      <legend>Add New Field</legend>
+      <div class="p-col extra-space">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-info-circle"></i>
+          </span>
+          <span class="p-float-label">
+            <input pInputText
+                   id="field-name"
+                   type="text"
+                   [(ngModel)]="fieldDefinition.fieldName"/>
+            <label for="field-name">Field Name</label>
+          </span>
+        </div>
+        <span class="alert alert-danger {{ fieldDefinitionValidation.isFieldNameInvalid ? 'visible' : 'hidden' }}">
+          <label>Field Name is required</label>
+        </span>
+      </div>
+      <div *ngIf="fileType == xmlType.value" class="p-col extra-space">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-info-circle"></i>
+          </span>
+          <span class="p-float-label">
+            <input pInputText
+                   id="xml-field-name"
+                   type="text"
+                   [(ngModel)]="fieldDefinition.xmlFieldName"/>
+            <label for="xml-field-name">XML Field Name</label>
+          </span>
+        </div>
+        <span class="alert">
+          <label>*only if different than field name</label>
+        </span>
+      </div>
+      <app-number-input [(value)]="fieldDefinition.startPosition"
+                        [minimum]="0"
+                        [invalid]="fieldDefinitionValidation.isStartPositionInvalid"
+                        [label]="'Start Position'"
+                        [validationMessage]="'Start Position is required'"
+                        [visible]="fileType == fixedType.value"
+                        [id]="'start-position'">
+      </app-number-input>
+      <app-number-input [(value)]="fieldDefinition.fieldLength"
+                        [minimum]="0"
+                        [invalid]="fieldDefinitionValidation.isFieldLengthInvalid"
+                        [label]="'Field Length'"
+                        [validationMessage]="'Field Length is required'"
+                        [visible]="fileType == fixedType.value"
+                        [id]="'field-length'">
+      </app-number-input>
+      <app-number-input [(value)]="fieldDefinition.positionInRow"
+                        [minimum]="0"
+                        [invalid]="fieldDefinitionValidation.isPositionInRowInvalid"
+                        [label]="'Position in Row'"
+                        [validationMessage]="'Position in Row is required'"
+                        [visible]="fileType == delimitedType.value"
+                        [id]="'position-in-row'">
+      </app-number-input>
+      <div class="p-col extra-space">
+        <div class="p-grid">
+          <div class="p-col-6">
+            <p-button label="Submit" (click)="onSubmit()"></p-button>
+          </div>
+          <div class="p-col-6">
+            <p-button class="p-button-danger" label="Cancel" (click)="toggleModal()"></p-button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</p-dialog>
