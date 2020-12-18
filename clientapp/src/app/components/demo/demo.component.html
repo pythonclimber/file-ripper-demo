@@ -49,7 +49,7 @@
             <label for="input-file">File to Rip:</label>
           </div>
           <div class="p-col-12 no-pad-top">
-            <input type="file" id="input-file" pInputText (change)="addFile($event.target.files)"/>
+            <input #inputFile type="file" id="input-file" pInputText (change)="addFile($event.target.files)"/>
           </div>
           <div class="p-col-12 alert no-pad-top {{ fileDefinitionValidation.isFileInvalid ? 'visible' : 'hidden' }}">
             <label style="color: red;">File is required</label>

@@ -23,8 +23,35 @@ export class FieldDefinitionTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  moveDown(fieldDef: FieldDefinition) {
+    const oldIndex = this.fileDefinition.fieldDefinitions.indexOf(fieldDef);
+    const newIndex = oldIndex + 1;
+
+    if (newIndex >= this.fileDefinition.fieldDefinitions.length) {
+      return;
+    }
+
+    this.moveFieldDef(oldIndex, newIndex, fieldDef);
+  }
+
+  moveUp(fieldDef: FieldDefinition) {
+    const oldIndex = this.fileDefinition.fieldDefinitions.indexOf(fieldDef);
+    const newIndex = oldIndex - 1;
+
+    if (oldIndex <= 0) {
+      return;
+    }
+
+    this.moveFieldDef(oldIndex, newIndex, fieldDef);
+  }
+
   deleteField(fieldDef: FieldDefinition) {
     const index = this.fileDefinition.fieldDefinitions.indexOf(fieldDef);
     this.fileDefinition.fieldDefinitions.splice(index, 1);
+  }
+
+  private moveFieldDef(oldIndex: number, newIndex: number, fieldDef: FieldDefinition) {
+    this.fileDefinition.fieldDefinitions.splice(oldIndex, 1);
+    this.fileDefinition.fieldDefinitions.splice(newIndex, 0, fieldDef);
   }
 }

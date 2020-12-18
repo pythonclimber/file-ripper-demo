@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DemoService} from "../../services/demo.service";
 import {FileType, FileTypes} from "../../domain/file-type";
 import {FieldDefinition, FileDefinition, FileDefinitionValidationResult} from "../../domain/file-definition";
@@ -24,6 +24,9 @@ export class DemoComponent implements OnInit {
   delimitedType: FileType = FileTypes.delimited;
   xmlType: FileType = FileTypes.xml;
   editMode: EditMode<FieldDefinition>;
+
+  @ViewChild('inputFile')
+  inputFile: ElementRef;
 
   constructor(private demoService: DemoService, private validationService: ValidationService) { }
 
@@ -133,6 +136,7 @@ export class DemoComponent implements OnInit {
         this.fileDefinition.delimiter = '';
         this.fileDefinition.recordXmlElement = '';
         this.fileDefinition.hasHeader = null;
+        this.inputFile.nativeElement.value = null;
         break;
     }
     this.fileDefinition.fieldDefinitions = [];
