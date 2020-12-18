@@ -19,10 +19,8 @@ export class DemoComponent implements OnInit {
   fileDefinitionValidation: FileDefinitionValidationResult;
   showAddField: boolean;
   file: File;
-  isFileInvalid: boolean;
   displayErrorDialog: boolean;
   errorMessage: string;
-  fixedType: FileType = FileTypes.fixed;
   delimitedType: FileType = FileTypes.delimited;
   xmlType: FileType = FileTypes.xml;
   editMode: EditMode<FieldDefinition>;

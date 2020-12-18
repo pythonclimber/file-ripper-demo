@@ -6,40 +6,20 @@
   <div class="p-grid extra-space">
     <fieldset class="extra-space">
       <legend>Add New Field</legend>
-      <div class="p-col extra-space">
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon">
-            <i class="pi pi-info-circle"></i>
-          </span>
-          <span class="p-float-label">
-            <input pInputText
-                   id="field-name"
-                   type="text"
-                   [(ngModel)]="fieldDefinition.fieldName"/>
-            <label for="field-name">Field Name</label>
-          </span>
-        </div>
-        <span class="alert alert-danger {{ fieldDefinitionValidation.isFieldNameInvalid ? 'visible' : 'hidden' }}">
-          <label>Field Name is required</label>
-        </span>
-      </div>
-      <div *ngIf="fileType == xmlType.value" class="p-col extra-space">
-        <div class="p-inputgroup">
-          <span class="p-inputgroup-addon">
-            <i class="pi pi-info-circle"></i>
-          </span>
-          <span class="p-float-label">
-            <input pInputText
-                   id="xml-field-name"
-                   type="text"
-                   [(ngModel)]="fieldDefinition.xmlFieldName"/>
-            <label for="xml-field-name">XML Field Name</label>
-          </span>
-        </div>
-        <span class="alert">
-          <label>*only if different than field name</label>
-        </span>
-      </div>
+      <app-field-text-input [visible]="true"
+                            [invalid]="fieldDefinitionValidation.isFieldNameInvalid"
+                            [maxlength]="50"
+                            [fieldLabel]="'Field Name'"
+                            [(text)]="fieldDefinition.fieldName"
+                            [errorMessage]="'Field Name is required'">
+      </app-field-text-input>
+      <app-field-text-input [visible]="fileType == xmlType.value"
+                            [invalid]="false"
+                            [maxlength]="50"
+                            [fieldLabel]="'XML Field Name'"
+                            [(text)]="fieldDefinition.xmlFieldName"
+                            [infoMessage]="'*only if different than field name'">
+      </app-field-text-input>
       <app-number-input [(value)]="fieldDefinition.startPosition"
                         [minimum]="0"
                         [invalid]="fieldDefinitionValidation.isStartPositionInvalid"

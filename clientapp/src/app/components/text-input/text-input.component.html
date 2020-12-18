@@ -10,7 +10,7 @@
            [disabled]="disabled"
            (ngModelChange)="onTextChange()"/>
   </div>
-  <div class="p-col-12 alert no-pad-top {{ !!infoMessage ? 'visible' : 'hidden' }}">
+  <div class="p-col-12 no-pad-top {{ !!infoMessage ? 'visible' : 'hidden' }}">
     <label>{{ infoMessage }}</label>
   </div>
   <div class="p-col-12 alert no-pad-top {{ invalid ? 'visible' : 'hidden' }}">

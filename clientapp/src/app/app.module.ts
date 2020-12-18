@@ -25,6 +25,7 @@ import {MenuModule} from "primeng/menu";
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { NumberInputComponent } from './components/number-input/number-input.component';
 import { FieldDefinitionTableComponent } from './components/field-definition-table/field-definition-table.component';
+import { FieldTextInputComponent } from './components/field-text-input/field-text-input.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FieldDefinitionTableComponent } from './components/field-definition-tab
     AddFieldComponent,
     TextInputComponent,
     NumberInputComponent,
-    FieldDefinitionTableComponent
+    FieldDefinitionTableComponent,
+    FieldTextInputComponent
   ],
   imports: [
     BrowserModule,
